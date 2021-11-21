@@ -1,0 +1,27 @@
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>익스프레스 서버</title>
+  <script>
+    function search() {
+      document.searchfm.submit();
+    }
+
+    function searchall() {
+      document.readall.submit();
+    }
+  </script>
+</head>
+<body>
+  <h1>익스프레스</h1>
+  <p>배워봅시다.</p>
+  <form method='get' name='readall' action='/user/readall'>
+    <input type='button' onClick='searchall()' value='전체 검색'></input>
+  </form>
+  <br>
+  <form method='get' name='searchfm' action='/user/read'>
+    <input type='text' name='st_name' placeholder="검색할 이름 입력">
+    <input type='button' onClick='search()' value='이름으로 검색'></input>
+  </form>
+</body>
+</html> 
