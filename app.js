@@ -14,7 +14,7 @@ const conn = mysql.createConnection({  //db베이스 연결
 });
 let lectures 
 const app = express(); //익스프레스 실행
-app.use(bodyParser.json())
+app.use(express.json())
 app.set('view engine', 'ejs');  // 뷰 세팅
 app.set('views', './view');  // 뷰 세팅
 app.use(cors())
@@ -61,8 +61,8 @@ app.get('/user/read/', function(req, res){
 app.post('/lecture',function(req,res){
   console.log(req.body);
   const lecture  = req.body
-  const column = "lecture_title,lecture_host,lecture_place,lecture_grade,lecture_member,lecture_des"
-  const value = `'${lecture.title}','${lecture.host}','${lecture.place}',${lecture.grade},${lecture.member},'${lecture.des}'`
+  const column = "lecture_title,lecture_host,lecture_place,lecture_grade,lecture_member,lecture_des,lecture_date"
+  const value = `'${lecture.title}','${lecture.host}','${lecture.place}',${lecture.grade},${lecture.member},'${lecture.des}', '${lecture.date}'`
   var sql = `INSERT INTO lecture (${column}) values(${value})`
   console.log(sql);
   conn.query(sql, (err,resul,fields)=>{
@@ -79,6 +79,7 @@ app.get('/lecture',function(req,res){
       console.log(err)
     }
     res.json(result)
+    console.log(result)
   })  
 })
 
