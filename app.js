@@ -8,9 +8,9 @@ const fs = require('fs')
 const conn = mysql.createConnection({  //db베이스 연결
     host     : 'localhost',
     user     : 'root',
-    password : '1234',
+    password : '12345678',
     port     : '3306',
-    database : 'evento'
+    database : 'teambuilding'
 });
 let lectures 
 const app = express(); //익스프레스 실행
@@ -61,9 +61,9 @@ app.get('/user/read/', function(req, res){
 app.post('/lecture',function(req,res){
   console.log(req.body);
   const lecture  = req.body
-  const column = "lecture_title,lecture_host,lecture_place,lecture_grade,lecture_member,lecture_des,lecture_date"
+  const column = "lc_title,lc_host,lc_place,lc_grade,lc_max,lc_des,lc_date"
   const value = `'${lecture.title}','${lecture.host}','${lecture.place}',${lecture.grade},${lecture.member},'${lecture.des}', '${lecture.date}'`
-  var sql = `INSERT INTO lecture (${column}) values(${value})`
+  const sql = `INSERT INTO lecture (${column}) values(${value})`
   console.log(sql);
   conn.query(sql, (err,resul,fields)=>{
     if(err){
@@ -81,6 +81,16 @@ app.get('/lecture',function(req,res){
     res.json(result)
     console.log(result)
   })  
+})
+
+app.post('/lecture/delete', (req,res) => {
+  console.log(req.body.id)
+    const dbdel = `DELETE FROM lecture WHERE lc_seq = ${req.body.id}`
+    conn.query(dbdel, (err, rows) => {
+      if(err) console.log(err)
+      else console.log('D')
+    })
+  
 })
 
 app.listen(app.get('port'), () => {
