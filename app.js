@@ -12,7 +12,6 @@ const conn = mysql.createConnection({  //db베이스 연결
     port     : '3306',
     database : 'teambuilding'
 });
-let lectures 
 const app = express(); //익스프레스 실행
 app.use(express.json())
 app.set('view engine', 'ejs');  // 뷰 세팅
